@@ -6,7 +6,7 @@ import Contact from './pages/Contact';
 
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
-
+//test
 function App() {
   return (
     <Router>
