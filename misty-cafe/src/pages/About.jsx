@@ -2,20 +2,47 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 function About() {
+  // Sidebar toggle handler (for mobile menu)
+  const toggleSidebar = () => {
+    document.getElementById("mobile-menu").classList.toggle("active");
+  };
+
+  const closeSidebar = () => {
+    document.getElementById("mobile-menu").classList.remove("active");
+  };
+
   return (
     <>
+      {/* Navbar */}
       <div className="navbar" id="topnav">
-        <Link to="/">Home</Link>
-        <Link to="/menu">Menu</Link>
-        <Link to="/contact">Contact</Link>
-        <Link to="/about" className="active">About</Link>
-        <a href="#" className="icon" onClick={() => {
-          document.getElementById("topnav").classList.toggle("responsive");
-        }}>
-          <i className="fa fa-bars"></i>
-        </a>
+        <div className="nav-links">
+          <Link to="/" className="logo">Misty Cafe</Link>
+          <Link to="/">Home</Link>
+          <Link to="/menu">Menu</Link>
+          <Link to="/contact">Contact</Link>
+          <Link to="/about">About</Link>
+        </div>
+
+        {/* Hamburger icon for mobile */}
+        <div style={{ marginLeft: "auto", marginRight: "25px" }}>
+          <a href="#" className="icon" onClick={() => {
+            document.getElementById("mobile-menu").classList.toggle("active");
+            }}>
+            <i className="fa fa-bars"></i>
+          </a>
+        </div>
       </div>
 
+      {/* Sidebar for mobile navigation */}
+      <div className="mobile-menu" id="mobile-menu">
+        <span className="close-btn" onClick={closeSidebar}>×</span>
+        <Link to="/" onClick={closeSidebar}>Home</Link>
+        <Link to="/menu" onClick={closeSidebar}>Menu</Link>
+        <Link to="/contact" onClick={closeSidebar}>Contact</Link>
+        <Link to="/about" onClick={closeSidebar}>About</Link>
+      </div>
+
+      {/* About Content */}
       <div className="about-container">
         <h2 className="abtitle">Misty Skies Restaurant: A Cozy Escape on Rainy Days</h2>
 
@@ -34,9 +61,7 @@ function About() {
         </p>
       </div>
 
-      <img className="about-im" src="/img/rest2.png" alt="Blueberry Waffles" />
-
-      
+      <img className="about-im" src="/img/rest2.png" alt="Cozy dining" />
     </>
   );
 }

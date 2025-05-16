@@ -2,29 +2,48 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 function Home() {
+  // Toggle sidebar open/close
+  const toggleSidebar = () => {
+    document.getElementById("mobile-menu").classList.toggle("active");
+  };
+
+  const closeSidebar = () => {
+    document.getElementById("mobile-menu").classList.remove("active");
+  };
+
   return (
     <>
+      {/* Navbar */}
       <div className="navbar" id="topnav">
-        <Link to="/" className="logo">Misty Cafe</Link>
-        <Link to="/" className="active">Home</Link>
-        <Link to="/menu">Menu</Link>
-        <Link to="/contact">Contact</Link>
-        <Link to="/about">About</Link>
-
-        <div id="cart-icon" style={{ position: "fixed", fontSize: "30px", top: "25px", right: "20px" }}>
-          <div style={{ position: "relative" }}>
-            <i className="ri-shopping-bag-2-line"></i>
-            <span id="cart-count" className="cart-count">0</span>
-          </div>
+        <div className="nav-links">
+          <Link to="/" className="logo">Misty Cafe</Link>
+          <Link to="/">Home</Link>
+          <Link to="/menu">Menu</Link>
+          <Link to="/contact">Contact</Link>
+          <Link to="/about">About</Link>
         </div>
 
-        <a href="#" className="icon" onClick={() => {
-          document.getElementById("topnav").classList.toggle("responsive");
-        }}>
-          <i className="fa fa-bars"></i>
-        </a>
+
+        {/* Hamburger icon for mobile */}
+        <div style={{ marginLeft: "auto", marginRight: "25px" }}>
+          <a href="#" className="icon" onClick={() => {
+            document.getElementById("mobile-menu").classList.toggle("active");
+            }}>
+            <i className="fa fa-bars"></i>
+          </a>
+        </div>
       </div>
 
+      {/* Sidebar for mobile navigation */}
+      <div className="mobile-menu" id="mobile-menu">
+        <span className="close-btn" onClick={closeSidebar}>×</span>
+        <Link to="/" onClick={closeSidebar}>Home</Link>
+        <Link to="/menu" onClick={closeSidebar}>Menu</Link>
+        <Link to="/contact" onClick={closeSidebar}>Contact</Link>
+        <Link to="/about" onClick={closeSidebar}>About</Link>
+      </div>
+
+      {/* Banner Slider */}
       <div className="banner-slider">
         {[
           {
@@ -53,7 +72,7 @@ function Home() {
             text: "A great way to warm up and relax, explore more of our menu!",
           },
           {
-            img: "/img/Waffles.png", 
+            img: "/img/Waffles.png",
             title: "Blueberry Delight!",
             text: "Try one of our popular items!",
           },

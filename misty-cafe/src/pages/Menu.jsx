@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 function Menu() {
   const [cartOpen, setCartOpen] = useState(false);
   const [cartItems, setCartItems] = useState([]);
+  const [sidebarOpen, setSidebarOpen] = useState(false); // mobile menu toggle
 
   const menuItems = [
     { name: "Creamy Broccoli Soup", price: "$11.99", desc: "A rich and creamy soup with tender broccoli and melted cheese...", img: "/img/Soup_.png" },
@@ -52,25 +53,36 @@ function Menu() {
     <>
       {/* Navbar */}
       <div className="navbar" id="topnav">
+      <div className="nav-links">
         <Link to="/" className="logo">Misty Cafe</Link>
         <Link to="/">Home</Link>
-        <Link to="/menu" className="active">Menu</Link>
+        <Link to="/menu">Menu</Link>
         <Link to="/contact">Contact</Link>
         <Link to="/about">About</Link>
-        
+      </div>
 
-        <div id="cart-icon" style={{ position: "fixed", fontSize: "30px", top: "25px", right: "20px" }} onClick={() => setCartOpen(true)}>
-          <div style={{ position: "relative" }}>
-            <i className="ri-shopping-bag-2-line"></i>
-            <span id="cart-count" className="cart-count">{cartItems.length}</span>
+        {/* Cart icon (always visible, even on mobile) */}
+        <div style={{ display: "flex", gap: "15px", marginLeft: "auto", marginRight: "20px", alignItems: "center" }}>
+          <div id="cart-icon" style={{ fontSize: "30px", cursor: "pointer" }} onClick={() => setCartOpen(true)}>
+            <div style={{ position: "relative" }}>
+              <i className="ri-shopping-bag-2-line"></i>
+              <span id="cart-count" className="cart-count">{cartItems.length}</span>
+            </div>
           </div>
-        </div>
+          <a href="#" className="icon" onClick={() => setSidebarOpen(!sidebarOpen)}>
+            <i className="fa fa-bars"></i>
+          </a>
+</div>
 
-        <a href="#" className="icon" onClick={() => {
-          document.getElementById("topnav").classList.toggle("responsive");
-        }}>
-          <i className="fa fa-bars"></i>
-        </a>
+      </div>
+
+      {/* Mobile Sidebar */}
+      <div className={`mobile-menu ${sidebarOpen ? "active" : ""}`} id="mobile-menu">
+        <span className="close-btn" onClick={() => setSidebarOpen(false)}>×</span>
+        <Link to="/" onClick={() => setSidebarOpen(false)}>Home</Link>
+        <Link to="/menu" onClick={() => setSidebarOpen(false)}>Menu</Link>
+        <Link to="/contact" onClick={() => setSidebarOpen(false)}>Contact</Link>
+        <Link to="/about" onClick={() => setSidebarOpen(false)}>About</Link>
       </div>
 
       {/* Cart Sidebar */}
