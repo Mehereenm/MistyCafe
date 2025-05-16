@@ -605,7 +605,9 @@ header {
 }
 
 .cart-detail {
-    display: grid;
+    display: flex;
+    flex-direction: column;
+    align-items: center; 
     gap: 10px;
     margin-right: auto;
 }
@@ -619,21 +621,30 @@ header {
     font-size: 18px;
     color: #a17a66;
     font-weight: 500;
+    font-weight: bold;
 }
 
 .cart-quantity {
     display: flex;
     width: 100px;
+    height: 30px;
     border: 1px solid #999;
     border-radius: 6px;
 }
 
 .cart-quantity button {
     background: transparent;
-    width: 30px;
-    font-size: 20px;
+    width: 28px;         
+    height: 100%;
+    font-size: 18px;
     border: none;
     cursor: pointer;
+    padding: 0;
+    line-height: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: bold;
 }
 
 .cart-quantity #decrement {
@@ -692,3 +703,4 @@ header {
     font-size: 35px;
     cursor: pointer;
 }
+
